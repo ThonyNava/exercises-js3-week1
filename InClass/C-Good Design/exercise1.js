@@ -1,5 +1,3 @@
-
-
 /*Task. go through all of these issues and make appropriate improvements to the code.
 
 1. Naming: the function has a bad name, myFunction() tells you nothing about
@@ -39,34 +37,40 @@
    
    */
 
+function myFunction(user) {
+  let originalSalary = user.salary;
+  let totalIncomeTax = user.incomeTax1 + user.incomeTax2;
+  let studentLoan = (originalSalary - 17775) * 0.09;
+  let nationalInsurance = user.nationalInsurance;
 
-function myFunction(salary, taxCode, incomeTax1, incomeTax2, ownsCar) {
-  var totalIncomeTax = incomeTax1 + incomeTax2;
-  var studentLoan = (salary - 17775) * 0.09;
-  var originalSalary = salary;
-  var nationalInsurance = null;
-
-  if (taxCode === "1150L") {
-    nationalInsurance = salary * 0.1;
-  } else if (taxCode === "ST") {
-    nationalInsurance = salary * 0.05;
+  if (user.taxCode === "1150L") {
+    nationalInsurance = originalSalary * 0.1;
+  } else if (user.taxCode === "ST") {
+    nationalInsurance = originalSalary * 0.05;
   } else {
-    nationalInsurance = salary * 0.08;
+    nationalInsurance = originalSalary * 0.08;
   }
 
-  var deductions = [nationalInsurance, totalIncomeTax, studentLoan];
+  let deductions = [nationalInsurance, totalIncomeTax, studentLoan];
+  deductions.forEach((n) => {
+    originalSalary -= n;
+  });
 
-  salary = salary - deductions[0];
-  salary = salary - deductions[1];
-  salary = salary - deductions[2];
+  message = `Your gross income is: ${originalSalary.toString()}${
+    user.currency
+  }; and your net income is: ${user.salary.toString()}${user.currency}`;
 
-  return (
-    "Your gross income is £" +
-    originalSalary.toString() +
-    " and your net income is £" +
-    salary.toString() +
-    "."
-  );
+  return message;
 }
 
-console.log(myFunction(28000, "1150L", 1000, 580, false));
+let user1 = {
+  salary: 28000,
+  taxCode: "1150L",
+  incomeTax1: 1000,
+  incomeTax2: 580,
+  ownsCar: false,
+  nationalInsurance: null,
+  currency: "â‚¬",
+};
+
+console.log(myFunction(user1));
