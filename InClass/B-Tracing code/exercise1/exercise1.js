@@ -1,11 +1,12 @@
 function greetPeople(people) {
-  var greeting = "He";
-  greeting = greeting + "llo";
-  greeting = greeting + " ";
+  var greeting = "Hello";
 
   people.forEach(function (person) {
-    greeting = greeting + person;
-    console.log(greeting);
+    message = `${greeting} ${person}`;
+    let p = document.createElement("p");
+    p.innerHTML = message;
+    document.getElementById("main").appendChild(p);
+    console.log(message);
   });
 
   return greeting;
